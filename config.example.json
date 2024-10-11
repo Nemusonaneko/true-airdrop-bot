@@ -1,0 +1,15 @@
+{
+    "bot": {
+        "token": "",
+        "client_id": ""
+    },
+    "channel_id": "",
+    "message_id": "",
+    "sql_creds": {
+        "host": "",
+        "port": "",
+        "database": "",
+        "username": "",
+        "password": ""
+    }
+}
