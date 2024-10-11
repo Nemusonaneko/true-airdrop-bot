@@ -7,12 +7,14 @@ import {
   Events,
   GatewayIntentBits,
 } from "discord.js";
-import { bot, channel_id, message_id } from "./config.json";
+import { bot, channel_id } from "./config.json";
 import * as path from "path";
 import * as fs from "fs";
 import { findUser } from "./utils/sql";
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+const client = new Client({
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
+});
 
 client.commands = new Collection();
 
@@ -102,6 +104,16 @@ client.on(Events.InteractionCreate, async (interaction) => {
     }
   } catch (error) {
     console.log(`[ERROR] Error with button: ${error}`);
+  }
+});
+
+client.on(Events.MessageCreate, async (message) => {
+  if (message.channelId !== channel_id) return;
+  try {
+    if (message.author.id === bot.client_id) return;
+    await message.delete();
+  } catch (error) {
+    console.error(`[ERROR] Error deleting unrelated message: ${error}`);
   }
 });
 
