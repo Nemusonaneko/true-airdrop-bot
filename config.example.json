@@ -4,7 +4,7 @@
         "client_id": ""
     },
     "channel_id": "",
-    "message_id": "",
+    "role_name": "",
     "sql_creds": {
         "host": "",
         "port": "",

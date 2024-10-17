@@ -1,5 +1,6 @@
 import { SlashCommandBuilder } from "discord.js";
 import { findUser, submitUserAddress } from "../../utils/sql";
+import { role_name } from "../../config.json";
 
 const evmRegex = /^(0x)?[0-9a-fA-F]{40}$/;
 
@@ -20,6 +21,14 @@ module.exports = {
         const regex = new RegExp(evmRegex);
         if (regex.test(userAddress)) {
           await submitUserAddress(userId, userAddress.toLowerCase());
+          const role = interaction.guild.roles.cache.find(
+            (role) => role.name === role_name
+          );
+          const member = interaction.member;
+          if (!role) {
+            console.log(`[WARN] Role does not exist`);
+          }
+          await member.roles.add(role);
           interaction.followUp({
             content: `You have registered: ${userAddress}`,
           });
