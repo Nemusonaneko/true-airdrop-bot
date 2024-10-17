@@ -92,8 +92,8 @@ client.on(Events.InteractionCreate, async (interaction) => {
       const entry = dbCheck[0];
       interaction.followUp({
         content: `Congrats! You are eligible for the airdrop!\n\n${
-          entry.wallet_address
-            ? `Your current wallet address: ${entry.wallet_address} (You can still edit it by using /register)`
+          entry.wallet
+            ? `Your current wallet address: ${entry.wallet} (You can still edit it by using /register)`
             : `Please add your wallet address by using the /register command.`
         }`,
       });

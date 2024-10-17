@@ -10,7 +10,7 @@ export async function findUser(userId: string) {
 export async function submitUserAddress(userId: string, walletAddress: string) {
   return await sql`
         UPDATE users 
-        SET wallet_address = ${walletAddress}
+        SET wallet = ${walletAddress}
         WHERE discord_id = ${userId}
     `;
 }
